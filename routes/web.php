@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::any('products/search', 'ProductController@search')->name('products.search');
-Route::resource('products', 'ProductController'); //->middleware('auth');
+Route::any('products/search', 'ProductController@search')->name('products.search')->middleware('auth');
+Route::resource('products', 'ProductController')->middleware('auth');
 
 /*
 Route::delete('products/{id}', 'ProductController@destroy')->name('products.destroy');
@@ -53,14 +53,11 @@ Route::group([
     'name' => 'admin.'
 ], function () {
     Route::get('/dashboard', 'TesteController@teste')->name('dashboard');
-        
-        
+                
     Route::get('/financeiro', 'TesteController@teste')->name('financeiro');
-   
-    
+      
     Route::get('/produtos', 'TesteController@teste')->name('products');
    
-
     Route::get('/', function () {
         return redirect()->route('admin.dashboard');
     })->name('home');
@@ -124,3 +121,5 @@ Route::get('/contato', function () {
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes(['register' => false]);
