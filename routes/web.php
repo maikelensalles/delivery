@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::post('/register', 'RegisterController@s')->name('register')->middleware('auth');
 Route::any('products/search', 'ProductController@search')->name('products.search')->middleware('auth');
-Route::resource('products', 'ProductController')->middleware('auth');
+Route::resource('products', 'ProductController')->middleware(['auth', 'check.is.admin']);
 
 /*
 Route::delete('products/{id}', 'ProductController@destroy')->name('products.destroy');
@@ -106,10 +107,6 @@ Route::any('/any', function () {
     return 'Any';
 });
 
-Route::post('/register', function () {
-    return '';
-});
-
 Route::get('/empresa', function () {
     return view('site.contact');
 });
@@ -122,4 +119,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('user', 'UserController', ['except' => ['show']]);
+	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+});
+

@@ -14,5 +14,5 @@
     <input type="file" name="image" class="form-control">
 </div>
 <div class="form-group">
-    <button type="submit" class="btn btn-dark">Enviar</button>
+    <button type="submit" class="btn btn-primary">Enviar</button>
 </div>

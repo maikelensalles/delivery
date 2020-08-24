@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a993688a4552c644071256b6b56c39a",
+    "content-hash": "57c2ceb8568db92a9fe0386f2b3894e9",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -738,6 +738,49 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "laravel-frontend-presets/argon",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-frontend-presets/argon.git",
+                "reference": "216d4d7bc0bcc8488396c9ec466d8bdcb219d61a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-frontend-presets/argon/zipball/216d4d7bc0bcc8488396c9ec466d8bdcb219d61a",
+                "reference": "216d4d7bc0bcc8488396c9ec466d8bdcb219d61a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelFrontendPresets\\ArgonPreset\\ArgonPresetServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelFrontendPresets\\ArgonPreset\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Laravel 7.x Front-end preset for argon",
+            "homepage": "https://github.com/creativetimofficial/argon-dashboard-laravel",
+            "keywords": [
+                "Argon",
+                "laravel",
+                "preset"
+            ],
+            "time": "2020-03-18T20:47:28+00:00"
         },
         {
             "name": "laravel/framework",
@@ -5677,6 +5720,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {
