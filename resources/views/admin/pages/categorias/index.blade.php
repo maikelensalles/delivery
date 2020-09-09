@@ -5,16 +5,16 @@
 
     <div class="container-fluid">
         <div class="header-body">
-            <div class="row">
+            <div class="row"> 
                 <div class="col">
                     <div class="card shadow">
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h3 class="mb-0">Listagem De Produtos</h3> 
+                                    <h3 class="mb-0">Listagem De Categorias</h3>
                                 </div>
                                 <div class="col text-right">
-                                    <a href="{{ route('products.create') }}" class="btn btn-sm btn-primary">Cadastrar</a>
+                                    <a href="{{ route('categorias.create') }}" class="btn btn-sm btn-primary">Cadastrar</a>
                                 </div>
                             </div>
                         </div>
@@ -22,36 +22,29 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col" width="100">Imagem</th>
+                                        <th scope="col">Imagem</th>
                                         <th scope="col">Nome</th>
-                                        <th scope="col">Preço</th>
                                         <th scope="col" width="100">Ações</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($produtos as $produto)
+                                    @foreach ($categorias as $categoria)
                                         <tr>
                                             <td>
-                                                @if ($produto->image)
-                                                    <img src="{{ url("storage/{$produto->image}") }}" alt="{{ $produto->nome }}" style="max-width: 100px;">
+                                                @if ($categoria->imagem)
+                                                    <img src="{{ url("storage/{$categoria->imagem}") }}" alt="{{ $categoria->nome }}" style="max-width: 100px;">
                                                 @endif 
                                             </td>
-                                            <td>{{ $produto->nome }}</td>
-                                            <td>{{ $produto->valor }}</td>
+                                            <td>{{ $categoria->nome }}</td>
                                             <td>
-                                                <div><a href="{{ route('products.edit', $produto->id) }}">Editar</a></div>
-                                                <div><a href="{{ route('products.show', $produto->id) }}">Detalhes</a></div>
+                                                <div><a href="{{ route('categorias.edit', $categoria->id) }}">Editar</a></div>
+                                                <div><a href="{{ route('categorias.show', $categoria->id) }}">Detalhes</a></div>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            @if (isset($filters))
-                            {!! $produtos->appends($filters)->links() !!}
-                            @else
-                            {!! $produtos->links() !!}
-                            @endif
                         </div> 
                     </div>
                 </div>

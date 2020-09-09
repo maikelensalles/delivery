@@ -74,8 +74,13 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('profile.edit') }}">
-                        <i class="ni ni-single-02 text-Default"></i> {{ __('Meu Perfil') }}
+                    <a class="nav-link" href="{{ route('vendas.index') }}">
+                        <i class="ni ni-credit-card text-danger"></i> {{ __('Vendas') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('categorias.index') }}">
+                        <i class="ni ni-bullet-list-67 text-success"></i> {{ __('Categorias') }}
                     </a>
                 </li>
                 <li class="nav-item">
@@ -83,11 +88,7 @@
                         <i class="ni ni-basket text-info"></i> {{ __('Produtos') }}
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('products.create') }}">
-                        <i class="ni ni-ruler-pencil text-pink"></i> {{ __('Cadastrar Produtos') }}
-                    </a>
-                </li>
+                
                
                 
             </ul>

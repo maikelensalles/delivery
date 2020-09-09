@@ -8,18 +8,17 @@
                 <div class="col">
                     <div class="card shadow">
                         <div class="card-header border-0">
-                            <h1>Produto {{ $produto->nome }} <a href="{{ route('products.index') }}"><<</a></h1>
+                            <h1>Categoria {{ $categoria->nome }} <a href="{{ route('categorias.index') }}"><<</a></h1>
 
                             <ul>
-                                <li><strong>Nome: </strong>{{ $produto->nome }}</li>
-                                <li><strong>Preço: </strong>{{ $produto->valor }}</li>
-                                <li><strong>Descrição: </strong>{{ $produto->descricao }}</li>
+                                <li><strong>Nome: </strong>{{ $categoria->nome }}</li>
+                                <li><strong>Descrição: </strong>{{ $categoria->descricao }}</li>
                             </ul>
 
-                            <form action="{{ route('products.destroy', $produto->id) }}" method="post">
+                            <form action="{{ route('categorias.destroy', $categoria->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-primary">Deletar o produto: {{ $produto->nome }}</button>
+                                <button type="submit" class="btn btn-primary">Deletar o Categoria: {{ $categoria->nome }}</button>
                             </form>
                         </div>
                     </div>

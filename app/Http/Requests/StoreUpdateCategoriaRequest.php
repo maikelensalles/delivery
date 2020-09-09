@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreUpdateProductRequest extends FormRequest
+class StoreUpdateCategoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,12 +26,9 @@ class StoreUpdateProductRequest extends FormRequest
         $id = $this->segment(2);
 
         return [
-            'nome' => "required|min:3|max:255|unique:produtos,nome,{$id},id",
+            'nome' => "required|min:3|max:255|unique:categorias,nome,{$id},id",
             'descricao' => 'required|min:3|max:1000',
-            'descricao_longa' => "required|min:3|max:10000",
-            'categoria' => 'required|min:1',
-            'valor' => "required|regex:/^\d+(\.\d{1,2})?$/",
-            'image' => 'required|image',
+            'imagem' => 'required|image',
             'nome_url' => 'required|min:2',  
         ];
     }

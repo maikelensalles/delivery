@@ -3,8 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', 'RegisterController@s')->name('register')->middleware('auth');
-Route::any('products/search', 'ProductController@search')->name('products.search')->middleware('auth');
-Route::resource('products', 'ProductController')->middleware(['auth', 'check.is.admin']);
+Route::any('products/search', 'ProdutoController@search')->name('products.search')->middleware('auth');
+Route::resource('products', 'ProdutoController');
+Route::resource('vendas', 'VendaController'); 
+Route::resource('categorias', 'CategoriaController'); 
+Route::resource('carrinho', 'CarController'); 
+
 
 /*
 Route::delete('products/{id}', 'ProductController@destroy')->name('products.destroy');
