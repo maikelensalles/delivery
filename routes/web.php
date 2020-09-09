@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', 'RegisterController@s')->name('register')->middleware('auth');
 Route::any('products/search', 'ProdutoController@search')->name('products.search')->middleware('auth');
-Route::resource('products', 'ProdutoController');
-Route::resource('vendas', 'VendaController'); 
-Route::resource('categorias', 'CategoriaController'); 
-Route::resource('carrinho', 'CarController'); 
+Route::resource('products', 'ProdutoController')->middleware('auth');
+Route::resource('vendas', 'VendaController')->middleware('auth'); 
+Route::resource('categorias', 'CategoriaController')->middleware('auth'); 
+Route::resource('carrinho', 'CarController')->middleware('auth'); 
+Route::resource('locais', 'LocalController')->middleware('auth'); 
+Route::resource('config', 'ConfController')->middleware('auth'); 
+
 
 
 /*

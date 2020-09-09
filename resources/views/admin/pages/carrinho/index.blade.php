@@ -22,7 +22,7 @@
                                         <th scope="col">ID Venda</th>
                                         <th scope="col">ID Produto</th>
                                         <th scope="col">CPF</th>
-                                        <th scope="col">Quantidade</th>
+                                        <th scope="col" width="100">Quantidade</th>
                                     </tr>
                                 </thead>
                                 <tbody>

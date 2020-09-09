@@ -32,7 +32,7 @@
                                         <th scope="col">Hora</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Pago</th>
-                                        <th scope="col">Observação</th>
+                                        <th scope="col" width="100">Observação</th>
                                         
                                     </tr>
                                 </thead>

@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Local extends Model
 {
-    protected $table = 'locais';
+    protected $table = 'locais'; 
+
+    public $timestamps = false;  
+
+    protected $fillable = ['id', 'nome'];
+
 }

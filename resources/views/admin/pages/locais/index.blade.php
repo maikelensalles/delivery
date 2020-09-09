@@ -11,10 +11,10 @@
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
-                                    <h3 class="mb-0">Listagem De Produtos</h3> 
+                                    <h3 class="mb-0">Bairros</h3> 
                                 </div>
                                 <div class="col text-right">
-                                    <a href="{{ route('products.create') }}" class="btn btn-sm btn-primary">Cadastrar</a>
+                                    <a href="{{ route('locais.create') }}" class="btn btn-sm btn-primary">Cadastrar</a>
                                 </div>
                             </div>
                         </div>
@@ -22,45 +22,34 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col" width="100">Imagem</th>
+                                        <th scope="col">ID</th>
                                         <th scope="col">Nome</th>
-                                        <th scope="col">Preço</th>
                                         <th scope="col" width="100">Ações</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    @foreach ($produtos as $produto)
+                                    @foreach ($locais as $local)
                                         <tr>
+                                            <td>{{ $local->id }}</td>
+                                            <td>{{ $local->nome }}</td>
                                             <td>
-                                                @if ($produto->image)
-                                                    <img src="{{ url("storage/{$produto->image}") }}" alt="{{ $produto->nome }}" style="max-width: 100px;">
-                                                @endif 
-                                            </td>
-                                            <td>{{ $produto->nome }}</td>
-                                            <td>{{ $produto->valor }}</td>
-                                            <td>
-                                                 <form action="{{ route('products.edit', $produto->id) }}">
+                                                <form action="{{ route('locais.edit', $local->id) }}">
                                                     @csrf
                                                     
                                                     <button type="submit" class="btn btn-success btn-sm">Editar</button>
                                                 </form>
                                                 <br>
-                                                <form action="{{ route('products.destroy', $produto->id) }}" method="post">
+                                                <form action="{{ route('locais.destroy', $local->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
                                                 </form>
-                                            </td>
+                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                            @if (isset($filters))
-                            {!! $produtos->appends($filters)->links() !!}
-                            @else
-                            {!! $produtos->links() !!}
-                            @endif
                         </div> 
                     </div>
                 </div>

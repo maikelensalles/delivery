@@ -15,7 +15,7 @@ class CreateLocaisTable extends Migration {
 	{
 		Schema::create('locais', function(Blueprint $table)
 		{
-			$table->integer('id', true);
+			$table->integer('id', true); 
 			$table->string('nome', 50);
 		});
 	}

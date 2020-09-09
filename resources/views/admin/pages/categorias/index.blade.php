@@ -38,8 +38,18 @@
                                             </td>
                                             <td>{{ $categoria->nome }}</td>
                                             <td>
-                                                <div><a href="{{ route('categorias.edit', $categoria->id) }}">Editar</a></div>
-                                                <div><a href="{{ route('categorias.show', $categoria->id) }}">Detalhes</a></div>
+                                                <form action="{{ route('categorias.edit', $categoria->id) }}">
+                                                    @csrf
+                                                    
+                                                    <button type="submit" class="btn btn-success btn-sm">Editar</button>
+                                                </form>
+                                                <br>
+                                                <form action="{{ route('categorias.show', $categoria->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                                                </form>
+                                                
                                             </td>
                                         </tr>
                                     @endforeach

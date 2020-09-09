@@ -88,6 +88,16 @@
                         <i class="ni ni-basket text-info"></i> {{ __('Produtos') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('locais.index') }}">
+                        <i class="ni ni-square-pin text-warning"></i> {{ __('Locais') }}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('config.index') }}">
+                        <i class="ni ni-settings-gear-65 text-default"></i> {{ __('Cofigurações') }}
+                    </a>
+                </li>
                 
                
                 
