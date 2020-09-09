@@ -8,7 +8,7 @@
                 <div class="col">
                     <div class="card shadow">
                         <div class="card-header border-0">
-                            <h1>Editar Bairro {{ $conf->nome }}</h1>
+                            <h1>Editar Configurações {{ $conf->nome }}</h1>
 
                             <form action="{{ route('config.update', $conf->id) }}" method="post" enctype="multipart/form-data">
                                     @method('PUT')

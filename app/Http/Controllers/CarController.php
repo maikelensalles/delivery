@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
+
 class CarController extends Controller
 {
     protected $request; 
@@ -66,7 +67,17 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        //
+        $carrinho = Car::withCount('comments')->get();
+
+        foreach ($carrinho as $car) {
+            echo $car->comments_count;
+        }
+        
+
+        
+        return view('layouts.headers.cards', [
+            'car' => $car,
+        ]);
     }
 
     /**

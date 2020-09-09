@@ -22,7 +22,6 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">ID</th>
                                         <th scope="col">Cliente</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Total Pago</th>
@@ -40,7 +39,6 @@
                                 <tbody>
                                     @foreach ($vendas as $venda)
                                         <tr>
-                                            <td>{{ $venda->id }}</td>
                                             <td>{{ $venda->cliente }}</td>
                                             <td>{{ $venda->total }}</td>
                                             <td>{{ $venda->total_pago }}</td>

@@ -22,7 +22,6 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">ID</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col" width="100">Ações</th>
                                     </tr>
@@ -31,7 +30,6 @@
                                 <tbody>
                                     @foreach ($locais as $local)
                                         <tr>
-                                            <td>{{ $local->id }}</td>
                                             <td>{{ $local->nome }}</td>
                                             <td>
                                                 <form action="{{ route('locais.edit', $local->id) }}">

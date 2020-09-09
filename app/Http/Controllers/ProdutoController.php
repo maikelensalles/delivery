@@ -81,7 +81,7 @@ class ProdutoController extends Controller
     {
         //$product = Product::where('id', $id)->first();
         if (!$produto = $this->repository->find($id))
-            return redirect()->back();
+            return redirect()->back(); 
 
         return view('admin.pages.products.show', [
             'produto' => $produto
