@@ -10,7 +10,7 @@
                         <h1>Cadastrar Nova Categoria</h1>
                         <form action="{{ route('categorias.store') }}" method="post" enctype="multipart/form-data" class="form">
                             @include('admin.pages.categorias.reuses.form')   
-                        </form>
+                        </form> 
                     </div>
                 </div>
             </div>

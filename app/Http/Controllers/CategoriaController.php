@@ -43,7 +43,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.categorias.create');
+        return view('admin.pages.categorias.create'); 
     }
 
     /**
@@ -76,10 +76,9 @@ class CategoriaController extends Controller
     public function show($id)
     {
         //$product = Product::where('id', $id)->first();
-        if (!$categoria = $this->repository->find($id))
-            return redirect()->back();
+        $categoria = Categoria::first()->paginate();
 
-        return view('admin.pages.categorias.show', [
+        return view('admin.pages.categorias.create', [
             'categoria' => $categoria
         ]);
     }
@@ -125,7 +124,7 @@ class CategoriaController extends Controller
         
         $categoria->update($data);
 
-        return redirect()->route('admin.pages.categorias.index');
+        return redirect()->route('categorias.index');
     }
 
     /**

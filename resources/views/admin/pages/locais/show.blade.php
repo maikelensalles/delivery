@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col">
                     <div class="card shadow">
-                        <div class="card-header border-0">
+                        <div class="card-header border-0"> 
                             <h1>Produto {{ $local->nome }} <a href="{{ route('locais.index') }}"><<</a></h1>
 
                             <ul>

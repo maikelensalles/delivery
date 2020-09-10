@@ -6,13 +6,24 @@
 </div>
 <div class="form-group">
     <input type="text" name="valor" class="form-control" placeholder="Preço:"  value="{{ $produto->valor ?? old('valor') }}">
-</div>
+</div> 
 <div class="form-group">
     <input type="text" name="descricao" class="form-control" placeholder="Descrição:"  value="{{ $produto->descricao ?? old('descricao') }}">
 </div>
 <div class="form-group">
     <input type="text" name="descricao_longa" class="form-control" placeholder="Descrição detalhada:"  value="{{ $produto->descricao_longa ?? old('descricao_longa') }}">
 </div>
+<div class="form-group">
+    <label for="exampleFormControlSelect1">Categoria</label>
+    <select class="form-control" id="exampleFormControlSelect1">  
+    <option>{{ $produto->categoria ?? old('categoria') }} Albatroz</option>
+    <option>{{ $produto->categoria ?? old('categoria') }} Gloria</option>
+    <option>{{ $produto->categoria ?? old('categoria') }} Medianeira</option>
+    <option>{{ $produto->categoria ?? old('categoria') }} Caiu do Céu</option>
+    <option>{{ $produto->categoria ?? old('categoria') }} Caravagio</option>
+    </select>
+  </div> 
+
 <div class="form-group">
     <input type="text" name="categoria" class="form-control" placeholder="Categoria:"  value="{{ $produto->categoria ?? old('categoria') }}">
 </div>

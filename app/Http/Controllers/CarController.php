@@ -67,17 +67,12 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        $carrinho = Car::withCount('comments')->get();
-
-        foreach ($carrinho as $car) {
-            echo $car->comments_count;
-        }
         
+        $carrinho = Car::select('quantidade'); 
+        $carrinho = $carrinho->count();
 
-        
-        return view('layouts.headers.cards', [
-            'car' => $car,
-        ]);
+        return view('layouts.headers.cards');
+
     }
 
     /**
