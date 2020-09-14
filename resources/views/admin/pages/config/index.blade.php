@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('content') 
+@section('content')
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 
     <div class="container-fluid">
         <div class="header-body">
-            <div class="row"> 
+            <div class="row">
                 <div class="col">
                     <div class="card shadow">
                         <div class="card-header border-0">
@@ -23,6 +23,8 @@
                                         <th scope="col">Taxa de Entrega</th>
                                         <th scope="col">Abertura</th>
                                         <th scope="col">Fechamento</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Contato</th>
                                         <th scope="col">Editar</th>
                                     </tr>
                                 </thead>
@@ -34,10 +36,12 @@
                                             <td>{{ $conf->taxa_entrega }}</td>
                                             <td>{{ $conf->abertura }}</td>
                                             <td>{{ $conf->fechamento }}</td>
+                                            <td><span class="badge badge-default">{{ $conf->status }}</span></td>
+                                            <td>{{ $conf->contato }}</td>
                                             <td>
                                                 <form action="{{ route('config.edit', $conf->id) }}">
                                                     @csrf
-                                                    
+
                                                     <button type="submit" class="btn btn-success btn-sm">Editar</button>
                                                 </form>
                                             </td>
@@ -45,7 +49,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>

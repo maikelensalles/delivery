@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content') 
+@section('content')
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
 
     <div class="container-fluid">
@@ -32,14 +32,14 @@
                                         <th scope="col">Status</th>
                                         <th scope="col">Pago</th>
                                         <th scope="col" width="100">Observação</th>
-                                        
+
                                     </tr>
                                 </thead>
 
                                 <tbody>
                                     @foreach ($vendas as $venda)
                                         <tr>
-                                            <td>{{ $venda->cliente }}</td>
+                                            <td>{{ $venda->nome_cliente }}</td>
                                             <td>{{ $venda->total }}</td>
                                             <td>{{ $venda->total_pago }}</td>
                                             <td>{{ $venda->troco }}</td>
@@ -49,7 +49,6 @@
                                             <td>{{ $venda->status }}</td>
                                             <td>{{ $venda->pago }}</td>
                                             <td>{{ $venda->obs }}</td>
-                                            
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -59,7 +58,7 @@
                             @else
                             {!! $vendas->links() !!}
                             @endif
-                        </div> 
+                        </div>
                     </div>
                 </div>
             </div>

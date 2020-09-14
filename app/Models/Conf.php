@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Conf extends Model
 {
-    protected $table = 'config'; 
+    protected $table = 'config';
 
-    public $timestamps = false;  
+    public $timestamps = false;
 
-    protected $fillable = ['previsao_minutos', 'taxa_entrega', 'abertura','fechamento'];
+    protected $fillable = ['previsao_minutos', 'taxa_entrega', 'abertura', 'fechamento', 'status', 'contato'];
 }

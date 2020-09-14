@@ -2,34 +2,32 @@
 
 @csrf
 <div class="form-group">
-    <input type="text" class="form-control" name="nome" placeholder="Nome:" value="{{ $produto->nome ?? old('nome') }}">
+    <input type="text" class="form-control" name="nome" placeholder="Nome:" value="{{ $produto ?? ''->nome ?? old('nome') }}">
 </div>
 <div class="form-group">
-    <input type="text" name="valor" class="form-control" placeholder="Preço:"  value="{{ $produto->valor ?? old('valor') }}">
+    <input type="text" name="valor" class="form-control" placeholder="Preço:"  value="{{ $produto ?? ''->valor ?? old('valor') }}">
 </div> 
 <div class="form-group">
-    <input type="text" name="descricao" class="form-control" placeholder="Descrição:"  value="{{ $produto->descricao ?? old('descricao') }}">
+    <input type="text" name="descricao" class="form-control" placeholder="Descrição:"  value="{{ $produto ?? ''->descricao ?? old('descricao') }}">
 </div>
 <div class="form-group">
-    <input type="text" name="descricao_longa" class="form-control" placeholder="Descrição detalhada:"  value="{{ $produto->descricao_longa ?? old('descricao_longa') }}">
+    <input type="text" name="descricao_longa" class="form-control" placeholder="Descrição detalhada:"  value="{{ $produto ?? ''->descricao_longa ?? old('descricao_longa') }}">
 </div>
 <div class="form-group">
     <label for="exampleFormControlSelect1">Categoria</label>
-    <select class="form-control" id="exampleFormControlSelect1">  
-    <option>{{ $produto->categoria ?? old('categoria') }} Albatroz</option>
-    <option>{{ $produto->categoria ?? old('categoria') }} Gloria</option>
-    <option>{{ $produto->categoria ?? old('categoria') }} Medianeira</option>
-    <option>{{ $produto->categoria ?? old('categoria') }} Caiu do Céu</option>
-    <option>{{ $produto->categoria ?? old('categoria') }} Caravagio</option>
+    <select class="form-control" name="categoria" value="" placeholder="Selecione..">
+    <option value="8">Lanches</option>
+    <option value="1">Bebidas</option>
+    <option value="14">Porções</option>
     </select>
-  </div> 
-
+  </div>
+ <!-- 
 <div class="form-group">
-    <input type="text" name="categoria" class="form-control" placeholder="Categoria:"  value="{{ $produto->categoria ?? old('categoria') }}">
-</div>
+    <input type="text" name="categoria" class="form-control" placeholder="Categoria:"  value="{{ $produto ?? ''->categoria ?? old('categoria') }}">
+</div> 
 <div class="form-group">
-    <input type="text" name="nome_url" class="form-control" placeholder="Nome da URL:"  value="{{ $produto->nome_url ?? old('nome_url') }}">
-</div>
+    <input type="text" name="nome_url" class="form-control" placeholder="Nome da URL:"  value="{{ $produto ?? ''->nome_url ?? old('nome_url') }}">
+</div>-->
 <div class="form-group">
     <input type="file" name="image" class="form-control">
 </div>

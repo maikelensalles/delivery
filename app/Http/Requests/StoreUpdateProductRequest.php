@@ -27,12 +27,11 @@ class StoreUpdateProductRequest extends FormRequest
 
         return [
             'nome' => "required|min:3|max:255|unique:produtos,nome,{$id},id",
-            'descricao' => 'required|min:3|max:1000',
-            'descricao_longa' => "required|min:3|max:10000",
+            'descricao' => 'min:3|max:1000',
+            'descricao_longa' => "min:3|max:10000",
             'categoria' => 'required|min:1',
             'valor' => "required|regex:/^\d+(\.\d{1,2})?$/",
             'image' => 'required|image',
-            'nome_url' => 'required|min:2',  
         ];
     }
 

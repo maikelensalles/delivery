@@ -58,7 +58,7 @@ class ProdutoController extends Controller
      */
     public function store(StoreUpdateProductRequest $request)
     {
-        $data = $request->only('nome', 'descricao', 'descricao_longa', 'categoria', 'valor', 'nome_url', 'image');
+        $data = $request->only('nome', 'descricao', 'descricao_longa', 'categoria', 'valor', 'image');
  
         if ($request->hasFile('image') && $request->image->isValid()) {
             $imagePath = $request->image->store('produtos');

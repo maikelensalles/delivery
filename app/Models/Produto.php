@@ -10,7 +10,7 @@ class Produto extends Model
 
     public $timestamps = false;  
 
-    protected $fillable = ['nome', 'valor', 'descricao','descricao_longa', 'categoria', 'image', 'nome_url'];
+    protected $fillable = ['nome', 'valor', 'descricao','descricao_longa', 'categoria', 'image'];
 
     public function search($filter = null) 
     {

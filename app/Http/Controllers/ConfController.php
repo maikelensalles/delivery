@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ConfController extends Controller
 {
-    protected $request; 
+    protected $request;
     private $repository;
 
     public function __construct(Request $request, Conf $conf)
@@ -19,7 +19,7 @@ class ConfController extends Controller
         /*$this->middleware('auth')->only([
             'create', 'store'
         ]);*/
-        /*$this->middleware('auth')->except([ 
+        /*$this->middleware('auth')->except([
             'index', 'show'
         ]);*/
     }
@@ -93,7 +93,7 @@ class ConfController extends Controller
     public function update(Request $request, $id)
     {
         if (!$conf = $this->repository->find($id))
-            return redirect()->back(); 
+            return redirect()->back();
 
         $data = $request->all();
 
