@@ -57,16 +57,62 @@
                         </div>
                     </div>
                 </div>
-                
+
             </div>
         </div>
     </div>
-</div>    
+</div>
 <div class="container-fluid mt--7">
     <div class="header-body">
         <div class="row">
             <div class="col">
-                <div class="card shadow">
+                <div class="card personalize">
+                    <div class="card-body">
+                      <h5 class="card-title">ID-PEDIDO - NOME DO CLIENTE</h5>
+                      <p class="card-text">01 - Xis Salada</p>
+                      <p class="card-text">02 - Xis Calabresa</p>
+                      <p class="card-text">01 - Xis Frango</p>
+                      <p class="card-text">Obs.: Sem Tomate...</p>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Informações
+                      </button>
+                    </div>
+                  </div>
+                  <!-- Modal -->
+                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Informações</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 ">
+                                    <h1>Endereço de Entrega:</h1>
+                                    <h3>Rua: Conego P. Jacobs</h3>
+                                    <h3>Número: 1012</h3>
+                                    <h3>Bairro: Caravágio</h3>
+                                </div>
+                                <div class="col-xl-6 col-lg-6">
+                                    <h1>Observações:</h1>
+                                    <h3>Sem tomate, mais maionese</h3>
+                                    <h3></h3>
+                                    <h3></h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                          <button type="button" class="btn btn-primary">Concluído</button>
+                          <!-- APERTOU CONCLUIDO, TEM QUE ALTERAR STATUS DO PEDIDO + RETIRAR DA LISTA ATUAL -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {{-- <div class="card shadow">
                     <div class="card-header border-0">
                         <div class="row align-items-center">
                             <div class="col">
@@ -78,7 +124,7 @@
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
-                                    
+
                                     <th scope="col">Cliente</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Total Pago</th>
@@ -116,12 +162,12 @@
                         {!! $vendas->links() !!}
                         @endif
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
 </div>
-    
+
 @endsection
 
 @push('js')
