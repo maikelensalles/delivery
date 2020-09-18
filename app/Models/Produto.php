@@ -23,4 +23,20 @@ class Produto extends Model
 
         return $results;
     }
+
+    public function categoria()
+    {
+        return $this->hasOne(Categoria::class, 'categoria', 'id');
+    }
+
+    public function vendas()
+    {
+        return $this->hasMany(Venda::class);
+    }
+
+    public function carrinho()
+    {
+        return $this->hasMany(Car::class);
+    }
+    
 }

@@ -30,6 +30,7 @@ class VendaController extends Controller
      */
     public function index()
     {
+
         $vendas = Venda::first()->paginate();
 
         return view('admin.pages.vendas.index', [

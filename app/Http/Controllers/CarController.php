@@ -8,21 +8,9 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    protected $request; 
-    private $repository;
-
-    public function __construct(Request $request, Car $car)
+    public function __construct()
     {
-        $this->request = $request;
-        $this->repository = $car;
-
-        //$this->middleware('auth');
-        /*$this->middleware('auth')->only([
-            'create', 'store'
-        ]);*/
-        /*$this->middleware('auth')->except([
-            'index', 'show'
-        ]);*/
+        $this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -31,8 +19,10 @@ class CarController extends Controller
      */
     public function index()
     {
+
         $carrinho = Car::first()->paginate();
 
+        
         return view('admin.pages.carrinho.index', [
             'carrinho' => $carrinho,
         ]);
@@ -56,7 +46,7 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -68,11 +58,6 @@ class CarController extends Controller
     public function show($id)
     {
         
-        $carrinho = Car::select('quantidade'); 
-        $carrinho = $carrinho->count();
-
-        return view('layouts.headers.cards');
-
     }
 
     /**

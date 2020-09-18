@@ -10,17 +10,16 @@ class Venda extends Model
 
     public $timestamps = false;
 
-    public function search($filter = null) 
+    protected $fillable = ['nome_cliente', 'total', 'total_pago', 'troco', 'tipo_pgto', 'data', 'hora', 'status', 'pago', 'obs'];
+
+    public function carrinho()
     {
+        return $this->belongsTo(Car::class, 'id_produto', 'id');
+    }
 
-        $results = $this->where(function ($query) use($filter) {
-            if ($filter) {
-                $query->where('nome', 'LIKE', "%{$filter}%");
-            }
-        })//->toSql();
-        ->paginate();
-
-        return $results;
+    public function produtos()
+    {
+        return $this->belongsTo(Produto::class);
     }
 }
 

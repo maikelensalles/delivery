@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
+use App\Models\Venda;
+use App\Models\Produto;
+use App\Models\Cliente;
+use Illuminate\Http\Request;
+
 class HomeController extends Controller
 {
     /**
@@ -21,6 +27,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $carrinho = Car::first();
+
+        $cliente = Cliente::first();
+
+        $vendas = Venda::first()->paginate();
+
+        $produtos = Produto::first();
+
+        
+        return view('dashboard', [
+            'carrinho' => $carrinho, 'cliente'=> $cliente, 'vendas' => $vendas, 'produtos' => $produtos,
+        ]);
+        
     }
 }

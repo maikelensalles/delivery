@@ -13,15 +13,13 @@
                                 <div class="col">
                                     <h3 class="mb-0">Listagem De Pedidos</h3>
                                 </div>
-                                <div class="col text-right">
-                                    <a href="{{ route('carrinho.index') }}" class="btn btn-sm btn-primary">Ver Carrinho</a>
-                                </div>
                             </div>
                         </div>
                         <div class="table-responsive">
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
+                                        <th scope="col">Pedido</th>
                                         <th scope="col">Cliente</th>
                                         <th scope="col">Total</th>
                                         <th scope="col">Total Pago</th>
@@ -39,6 +37,7 @@
                                 <tbody>
                                     @foreach ($vendas as $venda)
                                         <tr>
+                                            <td>{{ $venda->id_produto }}</td>
                                             <td>{{ $venda->nome_cliente }}</td>
                                             <td>{{ $venda->total }}</td>
                                             <td>{{ $venda->total_pago }}</td>
