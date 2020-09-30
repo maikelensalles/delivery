@@ -1,17 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
+        <a type="button" class="btn btn-success" style="margin-bottom: 15px" href="/home" >
+            <i class="fa fa-refresh"></i>
+            Recarregar
+        </a>
         <div class="header-body">
             <!-- Card stats -->
             <div class="row">
-                <div class="col-xl-4 col-lg-6">
+                <div class="col-xl-6 col-lg-6">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Carrinho</h5>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Lanches da Noite</h5>
                                 <span class="h2 font-weight-bold mb-0">{{ $carrinho->sum('quantidade') }}</span>
                                 </div>
                                 <div class="col-auto">
@@ -23,13 +28,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-6">
+                <div class="col-xl-6 col-lg-6">
                     <div class="card card-stats mb-4 mb-xl-0">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Total de Vendas</h5>
-                                    <span class="h2 font-weight-bold mb-0">$ {{ $vendas->sum('total') }}</span>
+                                    <h5 class="card-title text-uppercase text-muted mb-0">Caixa da Noite</h5>
+                                    <span class="h2 font-weight-bold mb-0">R$ {{ $vendas->sum('total') }}</span>
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -40,24 +45,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-6">
-                    <div class="card card-stats mb-4 mb-xl-0">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Usuários Cadastrados</h5>
-                                    <span class="h2 font-weight-bold mb-0">{{ $cliente->count('id') }}</span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                        <i class="fas fa-users"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
@@ -65,21 +52,28 @@
 <div class="container-fluid mt--7">
     <div class="header-body">
         <div class="row">
-            <div class="col">
-                <div class="card personalize">
+                @foreach ($vendas as $venda)
+                <div class="card col-xl-2 col-lg-2 margin-20">
                     <div class="card-body">
-                      <h5 class="card-title">ID-PEDIDO - NOME DO CLIENTE</h5>
-                      <p class="card-text">01 - Xis Salada</p>
-                      <p class="card-text">02 - Xis Calabresa</p>
-                      <p class="card-text">01 - Xis Frango</p>
-                      <p class="card-text">Obs.: Sem Tomate...</p>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                      <h5 class="card-title">#{{ $venda->id }} - {{ $venda->nome_cliente }}</h5>
+                        <br>
+                            <p class="card-text"><b>Lanche:</b>
+                            @foreach ($venda->carrinho as $cart)
+
+                                @foreach ($cart->produtos as $produto)
+                                <br>
+                                {{ $cart->quantidade }} - {{ $produto->nome }}
+
+                                @endforeach
+                            @endforeach
+                            </p>
+                      <p class="card-text"><b>Obs.:</b> {{ $venda->obs }}</p>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-{{ $venda->id }}">
                         Informações
                       </button>
                     </div>
-                  </div>
                   <!-- Modal -->
-                  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="exampleModal-{{ $venda->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -91,16 +85,36 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 ">
-                                    <h1>Endereço de Entrega:</h1>
-                                    <h3>Rua: Conego P. Jacobs</h3>
-                                    <h3>Número: 1012</h3>
-                                    <h3>Bairro: Caravágio</h3>
-                                </div>
+                                    <h1>Pedido:</h1>
+                                    <p class="card-text">
+                                    @foreach ($venda->carrinho as $cart)
+                                        @foreach ($cart->produtos as $produto)
+                                        Qtd: {{ $cart->quantidade }} Nome: {{ $produto->nome }}<br>
+                                        @endforeach
+                                    @endforeach
+                                    </p>
+                                </div><br>
                                 <div class="col-xl-6 col-lg-6">
                                     <h1>Observações:</h1>
-                                    <h3>Sem tomate, mais maionese</h3>
-                                    <h3></h3>
-                                    <h3></h3>
+                                    <p>{{ $venda->obs }}</p>
+                                    <p></p>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 ">
+                                    <h1>Endereço de Entrega:</h1>
+                                    <p>Rua: {{ $venda->rua }}</p>
+                                    <p>Número: {{ $venda->numero }}</p>
+                                    <p>Bairro: {{ $venda->bairro }}</p>
+                                </div>
+                                <div class="col-xl-6 col-lg-6">
+                                    <h1>Cliente:</h1>
+                                    <p>Nome:{{ $venda->nome_cliente }}</p>
+                                    <p>Telefone: {{ $venda->cliente }}</p>
+                                    <p>Total: R${{ $venda->total }}</p>
+                                    <p>Hora: {{ $venda->hora }}</p>
+                                    <p>Pagar com: {{ $venda->tipo_pgto }}</p>
                                 </div>
                             </div>
                         </div>
@@ -112,58 +126,8 @@
                       </div>
                     </div>
                   </div>
-                {{-- <div class="card shadow">
-                    <div class="card-header border-0">
-                        <div class="row align-items-center">
-                            <div class="col">
-                                <h3 class="mb-0">Pedidos</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table align-items-center table-flush">
-                            <thead class="thead-light">
-                                <tr>
-
-                                    <th scope="col">Cliente</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Total Pago</th>
-                                    <th scope="col">Troco</th>
-                                    <th scope="col">Tipo-Pagamento</th>
-                                    <th scope="col">Data</th>
-                                    <th scope="col">Hora</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Pago</th>
-                                    <th scope="col" width="100">Observação</th>
-
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                                @foreach ($vendas as $venda)
-                                    <tr>
-                                        <td>{{ $venda->nome_cliente }}</td>
-                                        <td>{{ $venda->total }}</td>
-                                        <td>{{ $venda->total_pago }}</td>
-                                        <td>{{ $venda->troco }}</td>
-                                        <td>{{ $venda->tipo_pgto }}</td>
-                                        <td>{{ $venda->data }}</td>
-                                        <td>{{ $venda->hora }}</td>
-                                        <td>{{ $venda->status }}</td>
-                                        <td>{{ $venda->pago }}</td>
-                                        <td>{{ $venda->obs }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        @if (isset($filters))
-                        {!! $vendas->appends($filters)->links() !!}
-                        @else
-                        {!! $vendas->links() !!}
-                        @endif
-                    </div>
-                </div> --}}
-            </div>
+                </div>
+                @endforeach
         </div>
     </div>
 </div>
@@ -173,4 +137,7 @@
 @push('js')
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.min.js"></script>
     <script src="{{ asset('argon') }}/vendor/chart.js/dist/Chart.extension.js"></script>
+
+    //Icons
+    <link rel="stylesheet" href="{{ asset('argon') }}/icons/css/font-awesome.css">
 @endpush

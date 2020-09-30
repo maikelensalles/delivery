@@ -31,14 +31,19 @@ class HomeController extends Controller
 
         $cliente = Cliente::first();
 
-        $vendas = Venda::first()->paginate();
+        $vendas = Venda::all();
 
         $produtos = Produto::first();
 
-        
+
         return view('dashboard', [
-            'carrinho' => $carrinho, 'cliente'=> $cliente, 'vendas' => $vendas, 'produtos' => $produtos,
+            'carrinho' => $carrinho,
+            'cliente'=> $cliente,
+            'vendas' => $vendas,
+            'produtos' => $produtos,
+            'cliente' => $cliente,
         ]);
-        
     }
+
+
 }

@@ -98,6 +98,12 @@
                         <i class="ni ni-settings-gear-65 text-default"></i> {{ __('Cofigurações') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">
+                        <i class="ni ni-user-run text-info "></i>{{ __('Sair') }}
+                    </a>
+                </li>
 
 
 

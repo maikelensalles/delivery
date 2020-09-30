@@ -19,7 +19,10 @@ class CreateCarrinhoTable extends Migration {
 			$table->integer('id_venda');
 			$table->integer('id_produto');
 			$table->string('cpf', 20);
-			$table->integer('quantidade');
+            $table->integer('quantidade');
+
+            $table->foreign('id_produto')->references('id')->on('produtos');
+            $table->foreign('id_venda')->references('id')->on('vendas');
 		});
 	}
 

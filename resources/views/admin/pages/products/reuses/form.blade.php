@@ -2,16 +2,16 @@
 
 @csrf
 <div class="form-group">
-    <input type="text" class="form-control" name="nome" placeholder="Nome:" value="{{ $produto ?? ''->nome ?? old('nome') }}">
+    <input type="text" class="form-control" name="nome" placeholder="Nome:" value="{{ $produto->nome ?? ''->nome ?? old('nome') }}">
 </div>
 <div class="form-group">
-    <input type="text" name="valor" class="form-control" placeholder="Preço:"  value="{{ $produto ?? ''->valor ?? old('valor') }}">
-</div> 
-<div class="form-group">
-    <input type="text" name="descricao" class="form-control" placeholder="Descrição:"  value="{{ $produto ?? ''->descricao ?? old('descricao') }}">
+    <input type="text" name="valor" class="form-control valor" placeholder="Preço:"  value="{{ $produto->valor ?? ''->valor ?? old('valor') }}">
 </div>
 <div class="form-group">
-    <input type="text" name="descricao_longa" class="form-control" placeholder="Descrição detalhada:"  value="{{ $produto ?? ''->descricao_longa ?? old('descricao_longa') }}">
+    <input type="text" name="descricao" class="form-control" placeholder="Descrição:"  value="{{ $produto->descricao ?? ''->descricao ?? old('descricao') }}">
+</div>
+<div class="form-group">
+    <input type="text" name="descricao_longa" class="form-control" placeholder="Descrição detalhada:"  value="{{ $produto->descricao_longa ?? ''->descricao_longa ?? old('descricao_longa') }}">
 </div>
 <div class="form-group">
     <label for="exampleFormControlSelect1">Categoria</label>
@@ -21,10 +21,10 @@
     <option value="14">Porções</option>
     </select>
   </div>
- <!-- 
+ <!--
 <div class="form-group">
     <input type="text" name="categoria" class="form-control" placeholder="Categoria:"  value="{{ $produto ?? ''->categoria ?? old('categoria') }}">
-</div> 
+</div>
 <div class="form-group">
     <input type="text" name="nome_url" class="form-control" placeholder="Nome da URL:"  value="{{ $produto ?? ''->nome_url ?? old('nome_url') }}">
 </div>-->

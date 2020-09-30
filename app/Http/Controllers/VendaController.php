@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use App\Models\Venda;
+use App\Models\Car;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
 {
-    protected $request; 
+    protected $request;
     private $repository;
 
     public function __construct(Request $request, Venda $venda)
@@ -30,11 +31,12 @@ class VendaController extends Controller
      */
     public function index()
     {
-
-        $vendas = Venda::first()->paginate();
+        $carrinhos = Car::first()->paginate();
+        $vendas = Venda::all();
 
         return view('admin.pages.vendas.index', [
             'vendas' => $vendas,
+            'carrinho' => $carrinhos,
         ]);
     }
 
@@ -115,4 +117,5 @@ class VendaController extends Controller
             'filters' => $filters,
         ]);
     }
+
 }

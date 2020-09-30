@@ -6,20 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class Car extends Model
 {
-    protected $table = 'carrinho'; 
+    protected $table = 'carrinho';
 
-    public $timestamps = false;  
+    public $timestamps = false;
 
     protected $fillable = ['id_venda', 'id_produto', 'cpf', 'quantidade'];
 
     public function produtos()
     {
-        return $this->hasMany(Produto::class);
+        return $this->hasMany(Produto::class, 'id', 'id_produto');
     }
 
     public function vendas()
     {
-        return $this->hasMany(Venda::class);
+        return $this->hasMany(Venda::class, 'id', 'id_venda');
     }
-
 }

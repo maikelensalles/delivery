@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produto extends Model
 {
-    protected $table = 'produtos'; 
+    protected $table = 'produtos';
 
-    public $timestamps = false;  
+    public $timestamps = false;
 
-    protected $fillable = ['nome', 'valor', 'descricao','descricao_longa', 'categoria', 'image'];
+    protected $fillable = ['id', 'nome', 'valor', 'descricao','descricao_longa', 'categoria', 'image'];
 
-    public function search($filter = null) 
+    public function search($filter = null)
     {
         $results = $this->where(function ($query) use($filter) {
             if ($filter) {
@@ -24,19 +24,14 @@ class Produto extends Model
         return $results;
     }
 
-    public function categoria()
+    public function pedidos()
     {
-        return $this->hasOne(Categoria::class, 'categoria', 'id');
+        return $this->belongsToMany(Car::class);
     }
 
-    public function vendas()
-    {
-        return $this->hasMany(Venda::class);
+    public function car() {
+        return $this->belongsToMany(Car::class);
     }
 
-    public function carrinho()
-    {
-        return $this->hasMany(Car::class);
-    }
-    
+
 }

@@ -14,12 +14,12 @@ class Venda extends Model
 
     public function carrinho()
     {
-        return $this->belongsTo(Car::class, 'id_produto', 'id');
+        return $this->hasMany(Car::class, 'id_venda', 'id');
     }
 
     public function produtos()
     {
-        return $this->belongsTo(Produto::class);
+        return $this->hasMany(Produto::class, 'id_produto', 'id');
     }
 }
 

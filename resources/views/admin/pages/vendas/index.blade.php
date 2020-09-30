@@ -28,7 +28,6 @@
                                         <th scope="col">Data</th>
                                         <th scope="col">Hora</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Pago</th>
                                         <th scope="col" width="100">Observação</th>
 
                                     </tr>
@@ -36,27 +35,27 @@
 
                                 <tbody>
                                     @foreach ($vendas as $venda)
-                                        <tr>
-                                            <td>{{ $venda->id_produto }}</td>
-                                            <td>{{ $venda->nome_cliente }}</td>
-                                            <td>{{ $venda->total }}</td>
-                                            <td>{{ $venda->total_pago }}</td>
-                                            <td>{{ $venda->troco }}</td>
-                                            <td>{{ $venda->tipo_pgto }}</td>
-                                            <td>{{ $venda->data }}</td>
-                                            <td>{{ $venda->hora }}</td>
-                                            <td>{{ $venda->status }}</td>
-                                            <td>{{ $venda->pago }}</td>
-                                            <td>{{ $venda->obs }}</td>
-                                        </tr>
+                                        @if($venda)
+                                            <tr>
+                                                <td>{{ $venda->id }}</td>
+                                                <td>{{ $venda->nome_cliente }}</td>
+                                                <td>{{ $venda->total }}</td>
+                                                <td>{{ $venda->total_pago }}</td>
+                                                <td>{{ $venda->troco }}</td>
+                                                <td>{{ $venda->tipo_pgto }}</td>
+                                                <td>{{ $venda->data }}</td>
+                                                <td>{{ $venda->hora }}</td>
+                                                <td>{{ $venda->status }}</td>
+                                                <td>{{ $venda->obs }}</td>
+                                            </tr>
+
+                                        @else
+                                              <p class="text-center">SEM VENDAS</p>
+                                        @endif
                                     @endforeach
+
                                 </tbody>
                             </table>
-                            @if (isset($filters))
-                            {!! $vendas->appends($filters)->links() !!}
-                            @else
-                            {!! $vendas->links() !!}
-                            @endif
                         </div>
                     </div>
                 </div>

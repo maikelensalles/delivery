@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
 {
-    protected $request; 
+    protected $request;
     private $repository;
 
     public function __construct(Request $request, Produto $produto)
@@ -21,17 +21,17 @@ class ProdutoController extends Controller
         /*$this->middleware('auth')->only([
             'create', 'store'
         ]);*/
-        /*$this->middleware('auth')->except([ 
+        /*$this->middleware('auth')->except([
             'index', 'show'
         ]);*/
     }
 
-    /** 
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() 
+    public function index()
     {
         $produtos = Produto::first()->paginate();
 
@@ -59,7 +59,7 @@ class ProdutoController extends Controller
     public function store(StoreUpdateProductRequest $request)
     {
         $data = $request->only('nome', 'descricao', 'descricao_longa', 'categoria', 'valor', 'image');
- 
+
         if ($request->hasFile('image') && $request->image->isValid()) {
             $imagePath = $request->image->store('produtos');
 
@@ -81,7 +81,7 @@ class ProdutoController extends Controller
     {
         //$product = Product::where('id', $id)->first();
         if (!$produto = $this->repository->find($id))
-            return redirect()->back(); 
+            return redirect()->back();
 
         return view('admin.pages.products.show', [
             'produto' => $produto
@@ -112,21 +112,21 @@ class ProdutoController extends Controller
     public function update(StoreUpdateProductRequest $request, $id)
     {
         if (!$produto = $this->repository->find($id))
-            return redirect()->back(); 
+            return redirect()->back();
 
         $data = $request->all();
 
-        if ($request->hasFile('image') && $request->image->isValid()) { 
-            
+        if ($request->hasFile('image') && $request->image->isValid()) {
+
             if ($produto->image && Storage::exists($produto->image)) {
                 Storage::delete($produto->image);
             }
 
             $imagePath = $request->image->store('produtos');
             $data['image'] = $imagePath;
-        
+
         }
-        
+
         $produto->update($data);
 
         return redirect()->route('products.index');
@@ -151,7 +151,7 @@ class ProdutoController extends Controller
         $produto->delete();
 
         return redirect()->route('products.index');
-    } 
+    }
 
     /**
      * Search Products

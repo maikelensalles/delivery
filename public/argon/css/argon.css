@@ -21871,4 +21871,11 @@ html:not([dir='rtl']) .noUi-horizontal .noUi-handle
     .personalize {
         width: 20%;
     }
+    .margin-20 {
+        margin: 20px;
+    }
+}
+
+.margin-20 {
+    margin: 20px;
 }

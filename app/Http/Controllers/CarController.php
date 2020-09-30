@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use Illuminate\Http\Request;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 
 class CarController extends Controller
@@ -22,10 +24,24 @@ class CarController extends Controller
 
         $carrinho = Car::first()->paginate();
 
-        
+
         return view('admin.pages.carrinho.index', [
             'carrinho' => $carrinho,
         ]);
+    }
+
+    /**
+     * Relacionamento da tabela Carrinho com as Vendas
+     */
+    public function relacionamento()
+    {
+        Schema::create('carrinho', function (Blueprint $table) {
+            $table->integer('id_produto')->unsigned();
+
+            $table->foreign('id_produto')
+                ->references('id')->on('produtos')
+                ->onDelete('cascade');
+        });
     }
 
     /**
@@ -57,7 +73,7 @@ class CarController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**
