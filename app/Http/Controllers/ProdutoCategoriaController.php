@@ -2,38 +2,32 @@
 
 namespace App\Http\Controllers; 
 
-use App\Http\Requests\StoreUpdateCategoriaRequest;
-use App\Models\Categoria;
-use Illuminate\Http\Request; 
+use App\Models\Produto;
+use Illuminate\Http\Request;
+use App\Models\ProdutoCategoria;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProdutoCategoriaRequest;
 
-class CategoriaController extends Controller
+class ProdutoCategoriaController extends Controller
 {
-    public function __construct(Request $request, Categoria $categoria)
+    protected $request;
+    private $repository;
+
+    public function __construct(Request $request, ProdutoCategoria $categoria)
     {
         $this->request = $request;
         $this->repository = $categoria;
-
-        //$this->middleware('auth');
-        /*$this->middleware('auth')->only([
-            'create', 'store'
-        ]);*/
-        /*$this->middleware('auth')->except([
-            'index', 'show'
-        ]);*/
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ProdutoCategoria $model)
     {
-        $categorias = Categoria::first()->paginate();
+        $categorias = ProdutoCategoria::paginate(25);
 
-        return view('admin.pages.categorias.index', [
-            'categorias' => $categorias,
-        ]);
+        return view('admin.pages.categorias.index', compact('categorias'));
     }
 
     /**
@@ -52,14 +46,14 @@ class CategoriaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateCategoriaRequest $request)
+    public function store(ProdutoCategoriaRequest $request, ProdutoCategoria $categoria)
     {
-        $data = $request->only('nome', 'descricao', 'nome_url', 'produtos', 'imagem');
+        $data = $request->only('name', 'image');
 
-        if ($request->hasFile('imagem') && $request->imagem->isValid()) {
-            $imagemPath = $request->imagem->store('categorias');
+        if ($request->hasFile('image') && $request->image->isValid()) {
+            $imagePath = $request->image->store('categorias');
 
-            $data['imagem'] = $imagemPath;
+            $data['image'] = $imagePath;
         }
 
         $this->repository->create($data);
@@ -73,15 +67,13 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ProdutoCategoria $categoria)
     {
-        //$product = Product::where('id', $id)->first();
-        $categoria = Categoria::first()->paginate();
-
-        return view('admin.pages.categorias.create', [
-            'categoria' => $categoria
+        return view('admin.pages.categorias.show', [
+            'categoria' => $categoria,
+            'produtos' => Produto::where('produto_categoria_id', $categoria->id)->paginate(25)
         ]);
-    }
+    } 
 
     /**
      * Show the form for editing the specified resource.
@@ -104,24 +96,23 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateCategoriaRequest $request, $id)
-    {
+    public function update(ProdutoCategoriaRequest $request, $id)
+    {   
         if (!$categoria = $this->repository->find($id))
-            return redirect()->back(); 
+            return redirect()->back();
 
         $data = $request->all();
 
-        if ($request->hasFile('imagem') && $request->imagem->isValid()) { 
-            
-            if ($categoria->imagem && Storage::exists($categoria->imagem)) {
-                Storage::delete($categoria->imagem);
+        if ($request->hasFile('image') && $request->image->isValid()) {
+
+            if ($categoria->image && Storage::exists($categoria->image)) {
+                Storage::delete($categoria->image);
             }
 
-            $imagemPath = $request->imagem->store('categorias');
-            $data['imagem'] = $imagemPath;
-        
+            $imagePath = $request->image->store('categorias');
+            $data['image'] = $imagePath;
         }
-        
+
         $categoria->update($data);
 
         return redirect()->route('categorias.index');
@@ -133,19 +124,19 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy( $id)
     {
         $categoria = $this->repository->where('id', $id)->first();
         if (!$categoria)
             return redirect()->back();
 
-        if ($categoria->imagem && Storage::exists($categoria->imagem)) {
-            Storage::delete($categoria->imagem);
+        if ($categoria->image && Storage::exists($categoria->image)) {
+            Storage::delete($categoria->image);
         }
 
         $categoria->delete();
 
-        return redirect()->route('admin.pages.categorias.index');
+        return redirect()->route('categorias.index');
     }
 
 }

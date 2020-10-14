@@ -7,7 +7,7 @@
         <div class="header-body">
             <div class="row">
                 <div class="col">
-                    <div class="card shadow">
+                    <div class="card shadow"> 
                         <div class="card-header border-0">
                             <div class="row align-items-center">
                                 <div class="col">
@@ -24,6 +24,8 @@
                                     <tr>
                                         <th scope="col" width="100">Imagem</th>
                                         <th scope="col">Nome</th>
+                                        <th scope="col">Categoria</th>
+                                        <th scope="col">Estoque</th>
                                         <th scope="col">Preço</th>
                                         <th scope="col" width="100">Ações</th>
                                     </tr>
@@ -38,11 +40,13 @@
                                                 @endif
                                             </td>
                                             <td>{{ $produto->nome }}</td>
-                                            <td>{{ $produto->valor }}</td>
+                                            <td>{{ $produto->categoria->name }}</a></td>
+                                            <td>{{ $produto->estoque }}</td>
+                                            <td>R$ {{ $produto->valor }}</td>
                                             <td>
-                                                 <form action="{{ route('products.edit', $produto->id) }}">
+                                                <form action="{{ route('products.edit', $produto->id) }}">
                                                     @csrf
-
+                                                    
                                                     <button type="submit" class="btn btn-success btn-sm">Editar</button>
                                                 </form>
                                                 <br>
@@ -50,7 +54,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
-                                                </form>
+                                                </form>                                               
                                             </td>
                                         </tr>
                                     @endforeach

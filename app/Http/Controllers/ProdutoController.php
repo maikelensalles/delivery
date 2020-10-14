@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreUpdateProductRequest;
 use App\Models\Produto;
+use App\Models\ProdutoCategoria;
+use App\Http\Requests\ProdutoRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,14 +17,6 @@ class ProdutoController extends Controller
     {
         $this->request = $request;
         $this->repository = $produto;
-
-        //$this->middleware('auth');
-        /*$this->middleware('auth')->only([
-            'create', 'store'
-        ]);*/
-        /*$this->middleware('auth')->except([
-            'index', 'show'
-        ]);*/
     }
 
     /**
@@ -33,11 +26,9 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::first()->paginate();
+        $produtos = Produto::paginate(25);
 
-        return view('admin.pages.products.index', [
-            'produtos' => $produtos,
-        ]);
+        return view('admin.pages.products.index', compact('produtos'));
     }
 
     /**
@@ -47,7 +38,9 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.products.create');
+        $categorias = ProdutoCategoria::all();
+
+        return view('admin.pages.products.create', compact('categorias'));
     }
 
     /**
@@ -56,9 +49,9 @@ class ProdutoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUpdateProductRequest $request)
+    public function store(ProdutoRequest $request, Produto $model)
     {
-        $data = $request->only('nome', 'descricao', 'descricao_longa', 'categoria', 'valor', 'image');
+        $data = $request->only('nome', 'descricao', 'descricao_longa', 'produto_categoria_id', 'estoque', 'valor', 'image');
 
         if ($request->hasFile('image') && $request->image->isValid()) {
             $imagePath = $request->image->store('produtos');
@@ -67,6 +60,7 @@ class ProdutoController extends Controller
         }
 
         $this->repository->create($data);
+
 
         return redirect()->route('products.index');
     }
@@ -77,15 +71,13 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Produto $produto)
     {
-        //$product = Product::where('id', $id)->first();
-        if (!$produto = $this->repository->find($id))
-            return redirect()->back();
+        $solds = $produto->solds()->latest()->limit(25)->get();
 
-        return view('admin.pages.products.show', [
-            'produto' => $produto
-        ]);
+        $receiveds = $produto->receiveds()->latest()->limit(25)->get();
+
+        return view('admin.pages.products.show', compact('produto', 'solds', 'receiveds'));
     }
 
     /**
@@ -94,12 +86,14 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit(Produto $produto, $id)
+    {    
+        $categorias = ProdutoCategoria::all();
+
         if (!$produto = $this->repository->find($id))
             return redirect()->back();
 
-        return view('admin.pages.products.edit', compact('produto'));
+        return view('admin.pages.products.edit', compact('produto', 'categorias'));
     }
 
     /**
@@ -109,9 +103,9 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreUpdateProductRequest $request, $id)
+    public function update(ProdutoRequest $request, Produto $produto, $id)
     {
-        if (!$produto = $this->repository->find($id))
+       if (!$produto = $this->repository->find($id))
             return redirect()->back();
 
         $data = $request->all();
@@ -124,7 +118,6 @@ class ProdutoController extends Controller
 
             $imagePath = $request->image->store('produtos');
             $data['image'] = $imagePath;
-
         }
 
         $produto->update($data);
@@ -138,7 +131,7 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Produto $produto, $id)
     {
         $produto = $this->repository->where('id', $id)->first();
         if (!$produto)
@@ -147,24 +140,9 @@ class ProdutoController extends Controller
         if ($produto->image && Storage::exists($produto->image)) {
             Storage::delete($produto->image);
         }
-
+    
         $produto->delete();
 
         return redirect()->route('products.index');
-    }
-
-    /**
-     * Search Products
-     */
-    public function search(Request $request)
-    {
-        $filters = $request->except('_token');
-
-        $produtos = $this->repository->search($request->filter);
-
-        return view('admin.pages.products.index', [
-            'produtos' => $produtos,
-            'filters' => $filters,
-        ]);
-    }
+    }   
 }

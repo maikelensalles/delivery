@@ -22,8 +22,10 @@
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">Imagem</th>
+                                        <th scope="col" width="100">Imagem</th>
                                         <th scope="col">Nome</th>
+                                        <th scope="col">Produtos</th>
+                                        <th scope="col">Estoque Total</th>
                                         <th scope="col" width="100">Ações</th>
                                     </tr>
                                 </thead>
@@ -32,11 +34,14 @@
                                     @foreach ($categorias as $categoria)
                                         <tr>
                                             <td>
-                                                @if ($categoria->imagem)
-                                                    <img src="{{ url("storage/{$categoria->imagem}") }}" alt="{{ $categoria->nome }}" style="max-width: 100px;">
+                                                @if ($categoria->image)
+                                                    <img src="{{ url("storage/{$categoria->image}") }}" alt="{{ $categoria->nome }}" style="max-width: 100px;">
                                                 @endif 
                                             </td>
-                                            <td>{{ $categoria->nome }}</td>
+                                            <td>{{ $categoria->name }}</td>
+                                            <td>{{ count($categoria->produtos) }}</td>
+                                            <td>{{ $categoria->produtos->sum('estoque') }}</td>
+                                            
                                             <td>
                                                 <form action="{{ route('categorias.edit', $categoria->id) }}">
                                                     @csrf
@@ -44,12 +49,11 @@
                                                     <button type="submit" class="btn btn-success btn-sm">Editar</button>
                                                 </form>
                                                 <br>
-                                                <form action="{{ route('categorias.show', $categoria->id) }}" method="post">
+                                                <form action="{{ route('categorias.destroy', $categoria->id) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
-                                                </form>
-                                                
+                                                </form>                                               
                                             </td>
                                         </tr>
                                     @endforeach

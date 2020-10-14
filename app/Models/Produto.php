@@ -10,7 +10,7 @@ class Produto extends Model
 
     public $timestamps = false;
 
-    protected $fillable = ['id', 'nome', 'valor', 'descricao','descricao_longa', 'categoria', 'image'];
+    protected $fillable = ['id', 'nome', 'valor', 'descricao','descricao_longa', 'produto_categoria_id', 'estoque', 'image'];
 
     public function search($filter = null)
     {
@@ -22,6 +22,11 @@ class Produto extends Model
         ->paginate();
 
         return $results;
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo('App\Models\ProdutoCategoria', 'produto_categoria_id')->withTrashed();
     }
 
     public function pedidos()
