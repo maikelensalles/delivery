@@ -23,6 +23,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Nome</th>
+                                        <th scope="col">Taxa de Entrega</th>
                                         <th scope="col" width="100">Ações</th>
                                     </tr>
                                 </thead>
@@ -31,6 +32,7 @@
                                     @foreach ($locais as $local)
                                         <tr>
                                             <td>{{ $local->nome }}</td>
+                                            <td>R$ {{ $local->valor}}</td>
                                             <td>
                                                 <form action="{{ route('locais.edit', $local->id) }}">
                                                     @csrf

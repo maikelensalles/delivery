@@ -10,6 +10,6 @@ class Local extends Model
 
     public $timestamps = false;  
 
-    protected $fillable = ['id', 'nome'];
+    protected $fillable = ['id', 'nome', 'valor'];
 
 }

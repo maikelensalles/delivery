@@ -20,7 +20,7 @@
                                 <thead class="thead-light">
                                     <tr>
                                         <th scope="col">Previsão em Minutos</th>
-                                        <th scope="col">Taxa de Entrega</th>
+                                        {{--<th scope="col">Taxa de Entrega</th>--}}
                                         <th scope="col">Abertura</th>
                                         <th scope="col">Fechamento</th>
                                         <th scope="col">Status</th>
@@ -33,7 +33,7 @@
                                     @foreach ($config as $conf)
                                         <tr>
                                             <td>{{ $conf->previsao_minutos }}</td>
-                                            <td>{{ $conf->taxa_entrega }}</td>
+                                            {{--<td>{{ $conf->taxa_entrega }}</td>--}}
                                             <td>{{ $conf->abertura }}</td>
                                             <td>{{ $conf->fechamento }}</td>
                                             <td><span class="badge badge-default">{{ $conf->status }}</span></td>

@@ -32,7 +32,7 @@ class LocalController extends Controller
      */
     public function index()
     {
-        $locais = Local::first()->paginate();
+        $locais = Local::paginate(25);
 
         return view('admin.pages.locais.index', [
             'locais' => $locais,
@@ -57,7 +57,7 @@ class LocalController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->only('nome', 'id');
+        $data = $request->only('nome', 'id', 'valor');
 
         $this->repository->create($data);
 

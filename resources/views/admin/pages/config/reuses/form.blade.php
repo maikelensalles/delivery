@@ -6,7 +6,7 @@
     <input type="text" class="form-control" name="previsao_minutos" placeholder="Previsao Minutos:" value="{{ $conf->previsao_minutos ?? old('previsao_minutos') }}">
 
 </div>
-<div class="form-group">
+{{--<div class="form-group">
     <label class="title">Valor da Tele-Entrega</label>
 
     <div class="input-group">
@@ -16,7 +16,7 @@
         <input type="text" name="taxa_entrega" class="form-control" placeholder="Taxa Entrega:"  value="{{ $conf->taxa_entrega ?? old('taxa_entrega') }}">
       </div>
 
-</div>
+</div>--}}
 <div class="form-group">
     <label class="title">Abertura do Comércio</label>
     <input type="time" name="abertura" class="form-control" placeholder="Abertura:"  value="{{ $conf->abertura ?? old('abertura') }}">

@@ -3,7 +3,11 @@
         <div class="header-body text-center mb-3">
             <div class="row justify-content-center">
                 <div class="col-lg-5 col-md-6">
-                    <h1 class="text-white">{{ __('Faça seu Login') }}</h1>
+                    <br>
+                    <h1 class="text-white">{{ __('Seja Bem Vindo!') }}</h1>
+                    <h3 class="text-white">{{ __('Entre com seu usuário e senha para acessar nosso painel.') }}</h3>
+                    <br>
+\                <br>
                 </div>
             </div>
         </div>
