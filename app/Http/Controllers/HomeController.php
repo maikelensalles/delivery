@@ -7,6 +7,7 @@ use App\Models\Venda;
 use App\Models\Produto;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -35,7 +36,6 @@ class HomeController extends Controller
 
         $produtos = Produto::first();
 
-
         return view('dashboard', [
             'carrinho' => $carrinho,
             'cliente'=> $cliente,
@@ -45,5 +45,13 @@ class HomeController extends Controller
         ]);
     }
 
+    public function destroy()
+    {
+        $carrinho = DB::table('carrinho')->truncate();
 
+        if (!$carrinho)
+            return redirect()->back();
+
+        return redirect()->route('home.index');
+    }
 }

@@ -5,14 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use Illuminate\Http\Request;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 
 class CarController extends Controller
 {
-    public function __construct()
+    protected $request;
+    private $repository;
+    
+    public function __construct(Request $request, Car $car)
     {
         $this->middleware('auth');
+        $this->request = $request;
+        $this->repository = $car;
     }
     /**
      * Display a listing of the resource.
@@ -21,9 +27,7 @@ class CarController extends Controller
      */
     public function index()
     {
-
-        $carrinho = Car::first()->paginate();
-
+        $carrinho = Car::first();
 
         return view('admin.pages.carrinho.index', [
             'carrinho' => $carrinho,
@@ -105,8 +109,19 @@ class CarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Car $car, $id)
     {
-        //
+        $car = $this->repository->where('id', $id)->first();
+        if (!$car)
+            return redirect()->back();
+    
+        $car->delete();
+
+        $car = DB::table('carrinho')->truncate();
+
+        if (!$car)
+            return redirect()->back();
+
+        return redirect()->route('carrinho.index');
     }
 }

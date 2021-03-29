@@ -4,77 +4,6 @@
     <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
         <div class="container-fluid">
             <div class="header-body">
-                <!-- Card stats -->
-                <div class="row">
-                    <div class="col-xl-3 col-lg-6">
-                        <div class="card card-stats mb-4 mb-xl-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Algo Aqui</h5>
-                                    <span class="h2 font-weight-bold mb-0">{{ $carrinho->sum('quantidade') }}</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
-                                            <i class="ni ni-cart"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6">
-                        <div class="card card-stats mb-4 mb-xl-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Algo Aqui</h5>
-                                        <span class="h2 font-weight-bold mb-0">00</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
-                                            <i class="fas fa-chart-pie"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6">
-                        <div class="card card-stats mb-4 mb-xl-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Algo Aqui</h5>
-                                        <span class="h2 font-weight-bold mb-0">00</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                                            <i class="fas fa-users"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-lg-6">
-                        <div class="card card-stats mb-4 mb-xl-0">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col">
-                                        <h5 class="card-title text-uppercase text-muted mb-0">Algo Aqui</h5>
-                                        <span class="h2 font-weight-bold mb-0">00</span>
-                                    </div>
-                                    <div class="col-auto">
-                                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
-                                            <i class="ni ni-delivery-fast"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -97,8 +26,9 @@
                                     <tr>
                                         <th scope="col">ID Venda</th>
                                         <th scope="col">ID Produto</th>
-                                        <th scope="col">CPF</th>
-                                        <th scope="col" width="100">Quantidade</th>
+                                        <th scope="col">Celular</th>
+                                        <th scope="col">Quantidade</th>
+                                        <th scope="col" width="100">Ação</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,6 +38,13 @@
                                             <td>{{ $car->id_produto }}</td>
                                             <td>{{ $car->cpf }}</td>
                                             <td>{{ $car->quantidade }}</td>
+                                            <td>
+                                                <form action="{{ route('carrinho.destroy', $car->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

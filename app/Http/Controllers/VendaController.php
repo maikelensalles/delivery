@@ -31,7 +31,7 @@ class VendaController extends Controller
      */
     public function index()
     {
-        $carrinhos = Car::first()->paginate();
+        $carrinhos = Car::first();
         $vendas = Venda::all();
 
         return view('admin.pages.vendas.index', [

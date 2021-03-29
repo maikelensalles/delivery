@@ -4,10 +4,25 @@
 
 <div class="header bg-gradient-primary pb-8 pt-5 pt-md-8">
     <div class="container-fluid">
-        <a type="button" class="btn btn-success" style="margin-bottom: 15px" href="/home" >
-            <i class="fa fa-refresh"></i>
-            Recarregar
-        </a>
+        <div class="row align-items-center">
+            <div class="col">
+                <a type="button" class="btn btn-success" style="margin-bottom: 15px" href="/home" >
+                    <i class="fa fa-refresh"></i>
+                    Recarregar
+                </a>            
+            </div>
+            <div class="col">
+                <form action="{{ route('home.destroy', $carrinho) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger" style="margin-bottom: 15px">
+                        <i class="fa fa-trash"></i>
+
+                        Limpar carrinho
+                    </button>
+                </form>           
+            </div>
+        </div>
         <div class="header-body">
             <!-- Card stats -->
             <div class="row">
@@ -17,7 +32,11 @@
                             <div class="row">
                                 <div class="col">
                                     <h5 class="card-title text-uppercase text-muted mb-0">Lanches da Noite</h5>
-                                <span class="h2 font-weight-bold mb-0">{{ $carrinho->sum('quantidade') }}</span>
+                                    @if($carrinho != NULL)
+                                    <span class="h2 font-weight-bold mb-0">{{ $carrinho->sum('quantidade') }}</span>
+                                    @else
+                                    <span class="h2 font-weight-bold mb-0">0</span>
+                                    @endif
                                 </div>
                                 <div class="col-auto">
                                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
