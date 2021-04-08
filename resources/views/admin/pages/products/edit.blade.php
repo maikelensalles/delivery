@@ -65,7 +65,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <input type="file" name="image" class="form-control form-control-alternative"  required>
+                                            <input type="file" name="image" class="form-control form-control-alternative" >
                                             @include('alerts.feedback', ['field' => 'image'])
                                         </div>
         

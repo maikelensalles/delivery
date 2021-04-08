@@ -32,7 +32,7 @@ class ProdutoRequest extends FormRequest
             'descricao_longa' => [],
             'estoque' => ['required'],
             'valor' => ['required'],
-            'image' => ['required'],
+            'image' => ['image'],
         ];
     }
 
